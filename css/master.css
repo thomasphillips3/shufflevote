@@ -1,0 +1,27 @@
+body {
+  background-color: rgba(36, 2, 64, .2);
+}
+header {
+  margin: auto;
+  height: 10em;
+  width: 70em;
+  background-color: rgba(68, 34, 0, .8);
+  border-top-right-radius: 100em;
+  border-top-left-radius: 100em;
+}
+#mainSection {
+  margin: auto;
+  height: 30em;
+  width: 70em;
+  background-color: rgba(68, 34, 0, .5);
+  border-bottom-right-radius: 10em;
+  border-bottom-left-radius: 10em;
+}
+
+#pageHeading {
+  text-align: center;
+  position: relative;
+  top: 0.4em;
+  font-family: 'Poiret One', sans-serif;
+  font-size: 5em;
+}
