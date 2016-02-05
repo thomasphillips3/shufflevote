@@ -25,3 +25,16 @@ header {
   font-family: 'Poiret One', sans-serif;
   font-size: 5em;
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 18.75em;
+  width: 70em;
+}
+
+.pic {
+  height: 18.75em;
+  width: 18.75em;
+  margin: auto;
+}
