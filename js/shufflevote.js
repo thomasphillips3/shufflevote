@@ -1,13 +1,7 @@
 (function () {
   console.log("hey");
-  loadImages();
-}());
 
-function loadImages(){
-  // Load images into an array
-  // Pick 3 random numbers between 0 and images.length
-  // Place those 3 indexes into the DOM
-  var images=[
+  var imageList=[
     "res/images/bag.jpg",
     "res/images/banana.jpg",
     "res/images/boots.jpg",
@@ -23,15 +17,34 @@ function loadImages(){
     "res/images/water_can.jpg",
     "res/images/wine_glass.jpg"  ];
 
+  var images=[];
+
+  // Create image objects for each image in the list
+  for (var i=0; i<imageList.length; i++) {
+    images[i] = new Image(imageList[i]);
+  }
+  console.log (images);
+
+  // Display 3 random pics
+  display(images);
+
+}());
+
+function Image(image){
+  this.image = image;
+  this.votes = 0;
+}
+
+function display (arr) {
   var elPics= [
     document.getElementById("pic1"),
     document.getElementById("pic2"),
     document.getElementById("pic3") ];
 
-  shuffle(images);
+  shuffle(arr);
 
   for (var i=0; i<3; i++) {
-    elPics[i].setAttribute("src", images[i]);
+    elPics[i].setAttribute("src", arr[i].image);
     }
 }
 
