@@ -3,14 +3,6 @@
   loadImages();
 }());
 
-var picShuffler = {
-  pics: [
-    document.getElementById('pic1'),
-    document.getElementById('pic2'),
-    document.getElementById('pic3'),
-    ],
-  }
-
 function loadImages(){
   // Load images into an array
   // Pick 3 random numbers between 0 and images.length
@@ -36,11 +28,27 @@ function loadImages(){
     document.getElementById("pic2"),
     document.getElementById("pic3") ];
 
+  shuffle(images);
+
   for (var i=0; i<3; i++) {
-    elPics[i].setAttribute("src", images[random(0,images.length)]);
-  }
+    elPics[i].setAttribute("src", images[i]);
+    }
 }
 
 function random(min, max) {
   return Math.floor(Math.random()*(max-min)+min);
+}
+
+function shuffle(arr) {
+  // Fisher-Yates Shuffle code adapted from https://github.com/coolaj86/knuth-shuffle
+  var i = arr.length, temp, randIndex;
+
+  while (0 !== i) {
+    randIndex = Math.floor(Math.random()*i);
+    i--;
+    temp = arr[i];
+    arr[i] = arr[randIndex];
+    arr[randIndex] = temp;
+  }
+  return arr;
 }
