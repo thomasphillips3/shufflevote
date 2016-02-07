@@ -1,6 +1,14 @@
 (function () {
   console.log("hey");
 
+  var pic1 = document.getElementById("pic1");
+  var pic2 = document.getElementById("pic2");
+  var pic3 = document.getElementById("pic3");
+
+  pic1.addEventListener("click", function() {onclick(images);}, false);
+  pic2.addEventListener("click", function() {onclick(images);}, false);
+  pic3.addEventListener("click", function() {onclick(images);}, false);
+
   var imageList=[
     "res/images/bag.jpg",
     "res/images/banana.jpg",
@@ -33,9 +41,22 @@
 function Image(image){
   this.image = image;
   this.votes = 0;
+
+  this.clickHandler = function() {
+    this.votes++;
+    display(images);
+    console.log(votes);
+  }
+}
+
+function onclick(images) {
+  console.log(images);
+  display(images);
+  console.log(window.event.target);
 }
 
 function display (arr) {
+  console.log("display ran");
   var elPics= [
     document.getElementById("pic1"),
     document.getElementById("pic2"),
@@ -55,7 +76,6 @@ function random(min, max) {
 function shuffle(arr) {
   // Fisher-Yates Shuffle code adapted from https://github.com/coolaj86/knuth-shuffle
   var i = arr.length, temp, randIndex;
-
   while (0 !== i) {
     randIndex = Math.floor(Math.random()*i);
     i--;
