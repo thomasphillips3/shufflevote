@@ -50,19 +50,17 @@ function Image(image){
 }
 
 function onclick(images) {
-  console.log(images);
   display(images);
-  console.log(window.event.target);
+  console.log("onclick ran");
 }
 
 function display (arr) {
   console.log("display ran");
+  shuffle(arr);
   var elPics= [
     document.getElementById("pic1"),
     document.getElementById("pic2"),
     document.getElementById("pic3") ];
-
-  shuffle(arr);
 
   for (var i=0; i<3; i++) {
     elPics[i].setAttribute("src", arr[i].image);
