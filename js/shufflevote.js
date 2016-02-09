@@ -1,13 +1,15 @@
 (function () {
   console.log("hey");
-  loadImages();
-}());
 
-function loadImages(){
-  // Load images into an array
-  // Pick 3 random numbers between 0 and images.length
-  // Place those 3 indexes into the DOM
-  var images=[
+  var pic1 = document.getElementById("pic1");
+  var pic2 = document.getElementById("pic2");
+  var pic3 = document.getElementById("pic3");
+
+  pic1.addEventListener("click", function() {onclick(images);}, false);
+  pic2.addEventListener("click", function() {onclick(images);}, false);
+  pic3.addEventListener("click", function() {onclick(images);}, false);
+
+  var imageList=[
     "res/images/bag.jpg",
     "res/images/banana.jpg",
     "res/images/boots.jpg",
@@ -23,15 +25,45 @@ function loadImages(){
     "res/images/water_can.jpg",
     "res/images/wine_glass.jpg"  ];
 
+  var images=[];
+
+  // Create image objects for each image in the list
+  for (var i=0; i<imageList.length; i++) {
+    images[i] = new Image(imageList[i]);
+  }
+  console.log (images);
+
+  // Display 3 random pics
+  display(images);
+
+}());
+
+function Image(image){
+  this.image = image;
+  this.votes = 0;
+
+  this.clickHandler = function() {
+    this.votes++;
+    display(images);
+    console.log(votes);
+  }
+}
+
+function onclick(images) {
+  display(images);
+  console.log("onclick ran");
+}
+
+function display (arr) {
+  console.log("display ran");
+  shuffle(arr);
   var elPics= [
     document.getElementById("pic1"),
     document.getElementById("pic2"),
     document.getElementById("pic3") ];
 
-  shuffle(images);
-
   for (var i=0; i<3; i++) {
-    elPics[i].setAttribute("src", images[i]);
+    elPics[i].setAttribute("src", arr[i].image);
     }
 }
 
@@ -42,7 +74,6 @@ function random(min, max) {
 function shuffle(arr) {
   // Fisher-Yates Shuffle code adapted from https://github.com/coolaj86/knuth-shuffle
   var i = arr.length, temp, randIndex;
-
   while (0 !== i) {
     randIndex = Math.floor(Math.random()*i);
     i--;
