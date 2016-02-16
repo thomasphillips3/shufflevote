@@ -1,14 +1,6 @@
 (function () {
   console.log("hey");
 
-  var pic1 = document.getElementById("pic1");
-  var pic2 = document.getElementById("pic2");
-  var pic3 = document.getElementById("pic3");
-
-  pic1.addEventListener("click", function() {onclick(images);}, false);
-  pic2.addEventListener("click", function() {onclick(images);}, false);
-  pic3.addEventListener("click", function() {onclick(images);}, false);
-
   var imageList=[
     "res/images/bag.jpg",
     "res/images/banana.jpg",
@@ -31,31 +23,51 @@
   for (var i=0; i<imageList.length; i++) {
     images[i] = new Image(imageList[i]);
   }
-  console.log (images);
+
+  var totalVotes = 0;
+  var pic1 = document.getElementById("pic1");
+  var pic2 = document.getElementById("pic2");
+  var pic3 = document.getElementById("pic3");
+
+  pic1.addEventListener("click", function() {onclick(images, totalVotes);}, false);
+  pic2.addEventListener("click", function() {onclick(images, totalVotes);}, false);
+  pic3.addEventListener("click", function() {onclick(images, totalVotes);}, false);
 
   // Display 3 random pics
-  display(images);
-
+  display(images, totalVotes);
 }());
 
-function Image(image){
+function Image(image) {
   this.image = image;
   this.votes = 0;
+}
 
-  this.clickHandler = function() {
-    this.votes++;
-    display(images);
-    console.log(votes);
+function onclick(images, totalVotes) {
+  var clicked = event.target.src;
+  clicked = clicked.substring(clicked.search("res/"))
+  for (var i=0; i<images.length; i++){
+    // Search the images object for the filename stored in 'clicked'
+    if (images[i].image === clicked){
+      // Increment the votes for the clicked object
+      images[i].votes++;
+      console.log(images[i].image + ": " + images[i].votes);
+      break;
+    }
+  }
+
+  // TODO: Find a better way to count totalVotes
+  for (var i=0; i<images.length; i++){
+    totalVotes += images[i].votes;
+  }
+
+  console.log("Total Votes: " + totalVotes);
+  display(images, totalVotes);
+  if (totalVotes % 15 === 0){
+    alert("hey");
   }
 }
 
-function onclick(images) {
-  display(images);
-  console.log("onclick ran");
-}
-
 function display (arr) {
-  console.log("display ran");
   shuffle(arr);
   var elPics= [
     document.getElementById("pic1"),
