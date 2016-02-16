@@ -31,31 +31,35 @@
   for (var i=0; i<imageList.length; i++) {
     images[i] = new Image(imageList[i]);
   }
-  console.log (images);
+  // console.log (images);
 
   // Display 3 random pics
   display(images);
 
 }());
 
-function Image(image){
+function Image(image) {
   this.image = image;
   this.votes = 0;
-
-  this.clickHandler = function() {
-    this.votes++;
-    display(images);
-    console.log(votes);
-  }
 }
 
 function onclick(images) {
+  var clicked = event.target.src;
+  clicked = clicked.substring(clicked.search("res/"))
+  for (var i=0; i<images.length; i++){
+    // Search the images object for the filename stored in 'clicked'
+    if (images[i].image === clicked){
+      // Increment the votes for the clicked object
+      images[i].votes++;
+      console.log(images[i].image + " has " + images[i].votes + " votes");
+    }
+  }
+  // console.log(clicked);
   display(images);
-  console.log("onclick ran");
 }
 
 function display (arr) {
-  console.log("display ran");
+  // console.log("display ran");
   shuffle(arr);
   var elPics= [
     document.getElementById("pic1"),
