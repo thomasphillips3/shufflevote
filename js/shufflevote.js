@@ -5,9 +5,9 @@
   var pic2 = document.getElementById("pic2");
   var pic3 = document.getElementById("pic3");
 
-  pic1.addEventListener("click", function() {onclick(images);}, false);
-  pic2.addEventListener("click", function() {onclick(images);}, false);
-  pic3.addEventListener("click", function() {onclick(images);}, false);
+  pic1.addEventListener("click", function() {onclick(images, totalVotes);}, false);
+  pic2.addEventListener("click", function() {onclick(images, totalVotes);}, false);
+  pic3.addEventListener("click", function() {onclick(images, totalVotes);}, false);
 
   var imageList=[
     "res/images/bag.jpg",
@@ -31,11 +31,10 @@
   for (var i=0; i<imageList.length; i++) {
     images[i] = new Image(imageList[i]);
   }
-  // console.log (images);
+  var totalVotes = 0;
 
   // Display 3 random pics
-  display(images);
-
+  display(images, totalVotes);
 }());
 
 function Image(image) {
@@ -43,7 +42,7 @@ function Image(image) {
   this.votes = 0;
 }
 
-function onclick(images) {
+function onclick(images, totalVotes) {
   var clicked = event.target.src;
   clicked = clicked.substring(clicked.search("res/"))
   for (var i=0; i<images.length; i++){
@@ -51,15 +50,20 @@ function onclick(images) {
     if (images[i].image === clicked){
       // Increment the votes for the clicked object
       images[i].votes++;
-      console.log(images[i].image + " has " + images[i].votes + " votes");
+      console.log(images[i].image + ": " + images[i].votes);
+      break;
     }
   }
-  // console.log(clicked);
-  display(images);
+
+  // TODO: Find a better way to count totalVotes
+  for (var i=0; i<images.length; i++){
+    totalVotes += images[i].votes;
+  }
+  console.log("Total Votes: " + totalVotes);
+  display(images, totalVotes);
 }
 
 function display (arr) {
-  // console.log("display ran");
   shuffle(arr);
   var elPics= [
     document.getElementById("pic1"),
