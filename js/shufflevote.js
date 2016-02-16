@@ -1,14 +1,6 @@
 (function () {
   console.log("hey");
 
-  var pic1 = document.getElementById("pic1");
-  var pic2 = document.getElementById("pic2");
-  var pic3 = document.getElementById("pic3");
-
-  pic1.addEventListener("click", function() {onclick(images, totalVotes);}, false);
-  pic2.addEventListener("click", function() {onclick(images, totalVotes);}, false);
-  pic3.addEventListener("click", function() {onclick(images, totalVotes);}, false);
-
   var imageList=[
     "res/images/bag.jpg",
     "res/images/banana.jpg",
@@ -31,7 +23,15 @@
   for (var i=0; i<imageList.length; i++) {
     images[i] = new Image(imageList[i]);
   }
+
   var totalVotes = 0;
+  var pic1 = document.getElementById("pic1");
+  var pic2 = document.getElementById("pic2");
+  var pic3 = document.getElementById("pic3");
+
+  pic1.addEventListener("click", function() {onclick(images, totalVotes);}, false);
+  pic2.addEventListener("click", function() {onclick(images, totalVotes);}, false);
+  pic3.addEventListener("click", function() {onclick(images, totalVotes);}, false);
 
   // Display 3 random pics
   display(images, totalVotes);
@@ -59,8 +59,12 @@ function onclick(images, totalVotes) {
   for (var i=0; i<images.length; i++){
     totalVotes += images[i].votes;
   }
+
   console.log("Total Votes: " + totalVotes);
   display(images, totalVotes);
+  if (totalVotes % 15 === 0){
+    alert("hey");
+  }
 }
 
 function display (arr) {
